@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'bmd/dist/css/bootstrap-material-design.min.css' %}" crossorigin="anonymous" />
+    <link rel="stylesheet" href="{% static 'FontAwesome/css/all.min.css' %}" crossorigin="anonymous" />
+    {% block css %}{% endblock %}
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <!-- Navbar content -->
+        <div class=""> <!-- style="max-width: 400rem;" -->
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-list fa-1x"></i>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="{% url 'Dashboard' %}">Dashboard</a> <!-- <i class="fas fa-desktop"></i> &nbsp; -->
+                  <a class="dropdown-item" href="{% url 'SampleTypeList' %}">檢體類型列表</a> <!-- <i class="fas fa-desktop"></i> &nbsp; -->
+                  <a class="dropdown-item" href="{% url 'CancerTypeList' %}">癌症類型列表</a> <!-- <i class="fas fa-desktop"></i> &nbsp; -->
+                  <a class="dropdown-item" href="{% url 'SurgeryMethodList' %}">手術方式列表</a> <!-- <i class="fas fa-desktop"></i> &nbsp; -->
+                  <a class="dropdown-item" href="{% url 'MedicationList' %}">用藥列表</a> <!-- <i class="fas fa-desktop"></i> &nbsp; -->
+                  <a class="dropdown-item" href="{% url 'BoxPositionList' %}">檢體位置</a> <!-- <i class="fas fa-desktop"></i> &nbsp; -->
+
+<!--                  {#% if request.user.is_authenticated %#}-->
+<!--                      {#% if perms.oven.view_oven %#}-->
+<!--                      <a class="dropdown-item" href="{#% url 'oven_list' %#}"><i class="fas fa-fire-alt"></i> &nbsp; Oven</a>-->
+<!--                      {#% endif %#}-->
+
+<!--                      {#% if perms.oven.view_oven_record %#}-->
+<!--                      <a class="dropdown-item" href="{#% url 'oven_record_list' %#}"><i class="fas fa-file-signature"></i> &nbsp; Oven Record</a>-->
+<!--                      {#% endif %#}-->
+
+<!--                      {#% if perms.oven.view_product_profile %#}-->
+<!--                      <a class="dropdown-item" href="{#% url 'product_profile_list' %#}"><i class="fab fa-maxcdn"></i> &nbsp; Model Type</a>-->
+<!--                      {#% endif %#}-->
+
+<!--                      {#% if perms.oven.view_process_profile %#}-->
+<!--                      <a class="dropdown-item" href="{#% url 'process_profile_list' %#}"><i class="fab fa-opera"></i> &nbsp; Operation</a>-->
+<!--                      {#% endif %#}-->
+
+<!--                      {#% if perms.oven.view_user %#}-->
+<!--                      <a class="dropdown-item" href="{#% url 'user_list' %#}"><i class="fas fa-user-circle"></i> &nbsp; User</a>-->
+<!--                      {#% endif %#}-->
+
+<!--                      {#% if perms.oven.view_permission %#}-->
+<!--                      <a class="dropdown-item" href="{#% url 'permission_list' %#}"><i class="fab fa-product-hunt"></i> &nbsp; Permission</a>-->
+<!--                      {#% endif %#}-->
+<!--                  {#% endif %#}-->
+              </ul>
+            </div>
+        </div>
+
+        <div class="mx-auto col-4">
+            <ul class="nav"> <!-- justify-content-center -->
+                <h1 id="nav_main" class="navbar-brand mx-auto">台北榮總 - 檢體系統</h1> <!-- style="font-size: 26px !important;" -->
+            </ul>
+        </div>
+        <div class="">
+            {% if request.user.is_authenticated %}
+                <label style="color:white">Hi, {{ request.user.username }}  &nbsp;&nbsp;</label>
+                <a href="{% url 'logout' %}" type="button" class="btn btn-outline-info">Logout</a>
+            {% else %}
+                <a href="{% url 'login' %}" type="button" class="btn btn-outline-success">Login</a>
+            {% endif %}
+        </div>
+    </nav>
+
+{% block body %}{% endblock %}
+
+
+<script src="{% static 'jQueryLib/jquery-3.4.1.slim.min.js' %}"></script>
+<script src="{% static 'jQueryLib/popper.min.js' %}"></script>
+<script src="{% static 'jQueryLib/bootstrap.min.js' %}"></script>
+<script src="{#% static 'axios.js' %#}"></script>
+{% block js %}{% endblock %}
+{% block modal %}{% endblock %}
+</body>
+</html>

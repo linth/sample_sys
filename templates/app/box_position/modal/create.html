@@ -1,0 +1,52 @@
+{% extends 'modal/general_create.html' %}
+
+{% block title %}檢體位置{% endblock %}
+
+{% block body %}
+<!-- Create Modal -->
+<!--<label>Box</label><br>-->
+<!--<input type="number"-->
+<!--       class="form-control"-->
+<!--       id="modal_box_create"-->
+<!--       name="modal_box_create"-->
+<!--       min="0"-->
+<!--       max="100"><br>-->
+
+<label>Box</label><br>
+<select class="form-control custom-select" id="nob" name="nob" value="{{ request.GET.nob }}">
+    <option value="">請選擇 Box</option>
+  {% for nob in box_position %}
+    {% if request.GET.no_of_box == nob.box %}
+      <option value="{{ nob.box }}" selected="selected">{{ nob.box }}</option>
+    {% else %}
+      <option value="{{ nob.box }}">{{ nob.box }}</option>
+    {% endif %}
+  {% endfor %}
+</select><br><br>
+
+<label>位置</label><br>
+<input type="number"
+       class="form-control"
+       id="modal_position_create"
+       name="modal_position_create"
+       min="0"
+       max="88"><br>
+
+<!--<label>是否被占用</label><br>-->
+<!--<input type="checkbox"-->
+<!--       class=""-->
+<!--       id="modal_is_used_create"-->
+<!--       name="modal_is_used_create"-->
+<!--       min="0"-->
+<!--       max="88"><br>-->
+
+
+{% endblock %}
+
+
+{% block submit_button %}
+<script type="text/javascript">
+  $('#nob').select2();
+</script>
+<button type="button" class="btn btn-outline-success" onclick="create()"><i class="fas fa-paper-plane"></i> 送出</button> &nbsp;
+{% endblock %}

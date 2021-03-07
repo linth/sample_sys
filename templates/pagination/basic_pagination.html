@@ -1,0 +1,47 @@
+{% if is_paginated %}
+  <ul class="pagination justify-content-center mb-4">
+    {% if page_obj.has_previous %}
+      <li class="page-item">
+        <a class="page-link"
+           href="?page={{ page_obj.previous_page_number }}{{search_condition}}"><</a> <!-- &larr; Newer -->
+      </li>
+    {% else %}
+      <li class="page-item disabled"><a class="page-link" href="#"><span><</span></a></li>
+    {% endif %}
+
+    {# left-side #}
+    {% if page_obj.number|add:'-3' == 1 %}
+      <li class="page-item page-link"><a href="?page=1{{search_condition}}">1</a></li>
+    {% elif page_obj.number|add:'-3' > 1 %}
+      <li class="page-item page-link"><a href="?page=1{{search_condition}}">1</a></li>
+      <li class="page-item page-link">...</li> <!-- <a href="?page={{ data.number|add:'-5' }}">&hellip;</a> -->
+    {% endif %}
+
+    {# midden #}
+    {% for i in paginator.page_range %}
+      {% if page_obj.number == i %}
+        <li class="page-item active"><a class="page-link"><span>{{ i }}</span></a></li>
+      {% elif i > page_obj.number|add:'-3' and i < page_obj.number|add:'3' %}
+        <li class="page-item page-link"><a href="?page={{ i }}{{search_condition}}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+
+    {# right-side #}
+    {% if page_obj.number|add:'3' == page_obj.paginator.num_pages %}
+      <li class="page-item page-link">
+        <a href="?page={{page_obj.paginator.num_pages}}{{search_condition}}">{{page_obj.paginator.num_pages}}</a>
+      </li>
+    {% elif page_obj.number|add:'3' < page_obj.paginator.num_pages %}
+      <li class="page-item page-link">...</li> <!-- <a href="?page={{ data.number|add:'-5' }}">&hellip;</a> -->
+      <li class="page-item page-link">
+        <a href="?page={{page_obj.paginator.num_pages}}{{search_condition}}">{{page_obj.paginator.num_pages}}</a>
+      </li>
+    {% endif %}
+
+    {% if page_obj.has_next %}
+      <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}{{search_condition}}">></a></li> <!-- Older &rarr; -->
+    {% else %}
+      <li class="page-item disabled"><a class="page-link" href="#"><span>></span></a></li>
+    {% endif %}
+  </ul>
+{% endif %}

@@ -1,0 +1,17 @@
+{% extends 'modal/general_create.html' %}
+
+{% block title %}手術方法{% endblock %}
+
+{% block body %}
+<!-- Create Modal -->
+<label>手術名稱</label><br>
+<input type="text"
+       class="form-control"
+       id="modal_sm_create"
+       name="modal_sm_create"><br>
+{% endblock %}
+
+
+{% block submit_button %}
+<button type="button" class="btn btn-outline-success" onclick="create()"><i class="fas fa-paper-plane"></i> 送出</button> &nbsp;
+{% endblock %}

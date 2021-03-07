@@ -1,0 +1,44 @@
+{% load static %}
+<form method="get">
+  <div class="form-row">
+    <div class="form-group col-md-3">
+      <div class="input-group mb-2">
+        <div class="input-group-prepend">
+          <!-- <div class="input-group-text">
+            站別
+          </div> -->
+        </div>
+        <select class="custom-select" id="medication" name="medication" value="{{ request.GET.medication }}">
+            <option value="">請選擇 用藥類型</option>
+          {% for m in medication %}
+            {% if request.GET.medication == m.name %}
+              <option value="{{ m }}" selected="selected">{{ m.name }}</option>
+            {% else %}
+              <option value="{{ m }}">{{ m.name }}</option>
+            {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group col-md-3">
+      <div class="input-group mb-2">
+        <div class="input-group-prepend">
+          <!-- <div class="input-group-text">
+            站別
+          </div> -->
+          <button type="submit" class="btn btn-outline-primary" name=""><i class="fas fa-search"></i> 查詢</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<script src="{% static 'axios.min.js' %}"></script>
+<script src="{% static 'bootstrap_SB/vendor/jquery/jquery.min.js' %}"></script>
+<link href="{% static 'select2.min.css' %}" rel="stylesheet" />
+<script src="{% static 'select2.min.js' %}"></script>
+
+<script type="text/javascript">
+  $('#medication').select2();
+</script>

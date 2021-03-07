@@ -1,0 +1,38 @@
+{% extends 'modal/general_update.html' %}
+
+{% block title %}檢體位置{% endblock %}
+
+{% block body %}
+<!-- Update Modal -->
+<!--<label>檢體位置</label><br>-->
+<!--<input class="form-control" id="modal_ct_update" name="modal_ct_update"><br>-->
+
+<div class="" id="box_position" name="box_position" hidden></div>
+
+<label>Box</label><br>
+<select class="form-control custom-select" id="nob" name="nob" value="{{ request.GET.nob }}">
+    <option value="">請選擇 Box</option>
+  {% for b in box %}
+    {% if request.GET.nob == b.no_of_box %}
+      <option value="{{ b.no_of_box }}" selected="selected">{{ b }}</option>
+    {% else %}
+      <option value="{{ b.no_of_box }}">{{ b }}</option>
+    {% endif %}
+  {% endfor %}
+</select><br><br>
+
+<label>位置</label><br>
+<input type="number"
+       class="form-control"
+       id="modal_position_update"
+       name="modal_position_update"
+       min="0"
+       max="88"><br>
+
+{% endblock %}
+
+{% block submit_button %}
+<button type="button" class="btn btn-outline-success" onclick="update()"><i class="fas fa-paper-plane"></i> 送出</button> &nbsp;
+{% endblock %}
+
+

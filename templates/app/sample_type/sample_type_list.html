@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}北榮檢體{% endblock %}
+
+{% block body %}
+<br>
+<div id="wrapper">
+  <div id="content-wrapper">
+    <div class="container-fluid">
+      <!-- search condition. -->
+      <div class="card border-dark mb-3">
+        <div class="card-header bg-primary text-center">檢體類型</div>
+        <div class="card-header">查詢條件</div>
+        <div class="card-body text-dark">
+          {% include 'app/sample_type/conditions.html' %}
+        </div>
+      </div>
+
+      <div class="card border-dark mb-3" style="max-width: 400rem;">
+        {#% if perms.oven.add_process_profile %#}
+          <button type="button"
+                  class="btn btn-outline-info"
+                  data-toggle="modal"
+                  data-target="#ModalCreate"
+                  onclick="empty_modal()">
+            <i class="fas fa-plus-circle"></i> &nbsp; 新增資料</i>
+          </button>
+          <br>
+        {#% endif %#}
+        {% include 'app/sample_type/table_result.html' %}
+      </div>
+    <div> <!-- /.container-fluid -->
+  </div> <!-- /.content-wrapper -->
+</div> <!-- /#wrapper -->
+{% endblock %}
+
+{% block js %}
+<script src="{#% static 'app/sample_type/crud.js' %#}"></script>
+{% endblock %}
